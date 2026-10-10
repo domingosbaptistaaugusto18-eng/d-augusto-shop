@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D.A SHOP | E-books, Produtividade, Tecnologia e Ferramentas</title>
+  <meta name="description" content="D.A SHOP, loja online da D.AUGUSTO: e-books, produtividade, tecnologia, ferramentas, recursos digitais e outros produtos úteis para aprender e evoluir.">
+  <meta name="keywords" content="D.A SHOP, D.AUGUSTO, e-books, produtos digitais, produtividade, hábitos, disciplina, tecnologia, ferramentas, recursos digitais, desenvolvimento pessoal">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="D.A SHOP | E-books, Produtividade, Tecnologia e Ferramentas">
+  <meta property="og:description" content="Loja online da D.AUGUSTO com e-books, produtividade, tecnologia, ferramentas e recursos para aprender e evoluir.">
+  <meta name="theme-color" content="#0B0F14">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Permite esconder elementos de "reveal" apenas se o JavaScript estiver ativo -->
+  <script>
+    document.documentElement.classList.add('js');
+    // Se o script principal não arrancar (erro ou ficheiro cortado), mostra todo o conteúdo
+    setTimeout(function () {
+      if (!window.__daReady) document.documentElement.classList.remove('js');
+    }, 1500);
+  </script>
+  <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+
+  <style>
+    /* =========================================================
+       1. VARIÁVEIS E BASE
+       ========================================================= */
+    :root {
+      --bg: #0B0F14;
+      --surface: #121821;
+      --surface-2: #18202b;
+      --blue: #00A8FF;
+      --white: #FFFFFF;
+      --muted: rgba(255, 255, 255, 0.72);
+      --line: rgba(255, 255, 255, 0.12);
+      --glow: 0 0 22px rgba(0, 168, 255, 0.55);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --header-h: 84px;
+      --max: 1200px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 12px); }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Montserrat', system-ui, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    body.menu-open { overflow: hidden; }
+    img, svg { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; margin: 0; padding: 0; }
+    button { font: inherit; color: inherit; cursor: pointer; }
+    h1, h2, h3, h4, p { margin: 0; }
+
+    :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+
+    .container { width: min(100% - 2.5rem, var(--max)); margin-inline: auto; }
+    .section { padding-block: clamp(3.5rem, 8vw, 6rem); }
+    .section-alt { background: var(--surface); border-block: 1px solid var(--line); }
+    .section-title {
+      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      margin-bottom: 2rem;
+    }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; overflow: hidden;
+      clip: rect(0 0 0 0); white-space: nowrap;
+    }
+    .skip-link {
+      position: absolute; left: 1rem; top: -4rem; z-index: 200;
+      padding: 0.7rem 1.1rem; border-radius: 999px;
+      background: var(--blue); color: var(--bg); font-weight: 700;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* Botões */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.9rem 1.8rem;
+      border-radius: 999px;
+      border: 2px solid transparent;
+      font-weight: 700; font-size: 0.95rem;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+    }
+    .btn-primary { background: var(--blue); color: var(--bg); }
+    .btn-primary:hover { box-shadow: var(--glow); transform: translateY(-2px); }
+    .btn-outline { border-color: var(--white); color: var(--white); background: transparent; }
+    .btn-outline:hover { border-color: var(--blue); color: var(--blue); box-shadow: var(--glow); transform: translateY(-2px); }
+
+    /* Imagens de exemplo (placeholders). Para usar fotos reais, adicione
+       style="background-image:url('caminho/da/foto.jpg')" ao elemento .ph */
+    .ph {
+      position: relative;
+      background-color: var(--surface-2);
+      background-image:
+        radial-gradient(circle at 30% 20%, rgba(0, 168, 255, .28), transparent 55%),
+        linear-gradient(145deg, #1b2431, #0e131a);
+      background-size: cover;
+      background-position: center;
+      display: grid; place-items: center;
+    }
+
+    /* =========================================================
+       2. BARRA SUPERIOR
+       ========================================================= */
+    .topbar { position: relative; z-index: 90; background: var(--blue); color: var(--bg); font-size: 0.8rem; font-weight: 600; }
+    .topbar ul {
+      display: flex; gap: 2rem; justify-content: center;
+      padding: 0.5rem 1.25rem;
+      overflow-x: auto; white-space: nowrap;
+      scrollbar-width: none;
+    }
+    .topbar ul::-webkit-scrollbar { display: none; }
+    .topbar a:hover { text-decoration: underline; }
+
+    /* =========================================================
+       3. CABEÇALHO (logo + pesquisa + conta + carrinho + menu)
+       ========================================================= */
+    .site-header {
+      position: sticky; top: 0; z-index: 80;
+      background: rgba(11, 15, 20, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .header-inner {
+      height: var(--header-h);
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .logo { font-weight: 900; font-size: clamp(1.5rem, 2.6vw, 1.9rem); letter-spacing: 0.05em; white-space: nowrap; line-height: 1.05; flex: none; }
+    .logo span { color: var(--blue); }
+
+    .header-icons { display: flex; align-items: center; gap: 0.25rem; }
+    .icon-btn {
+      position: relative;
+      width: 44px; height: 44px;
+      display: grid; place-items: center;
+      background: none; border: 0; border-radius: 50%;
+      color: var(--white);
+      transition: background .2s ease, box-shadow .2s ease, color .2s ease;
+    }
+    .icon-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .icon-btn:hover { background: rgba(0, 168, 255, .14); box-shadow: var(--glow); color: var(--blue); }
+    .cart-count {
+      position: absolute; top: 2px; right: 0;
+      min-width: 20px; height: 20px; padding: 0 5px;
+      display: grid; place-items: center;
+      background: var(--blue); color: var(--bg);
+      border-radius: 999px; font-size: 0.7rem; font-weight: 800; line-height: 1;
+    }
+
+    /* Botão ☰ (três linhas) no canto superior direito */
+    .menu-toggle {
+      margin-left: 0.4rem;
+      border: 1px solid rgba(0, 168, 255, .5);
+      border-radius: 12px;
+    }
+    .menu-toggle .bars { position: relative; width: 22px; height: 16px; }
+    .menu-toggle .bars span {
+      position: absolute; left: 0; width: 100%; height: 2px;
+      background: currentColor; border-radius: 2px;
+      transition: transform .3s ease, opacity .2s ease, top .3s ease;
+    }
+    .menu-toggle .bars span:nth-child(1) { top: 0; }
+    .menu-toggle .bars span:nth-child(2) { top: 7px; }
+    .menu-toggle .bars span:nth-child(3) { top: 14px; }
+    .menu-toggle[aria-expanded="true"] { color: var(--blue); }
+    .menu-toggle[aria-expanded="true"] .bars span:nth-child(1) { top: 7px; transform: rotate(45deg); }
+    .menu-toggle[aria-expanded="true"] .bars span:nth-child(2) { opacity: 0; }
+    .menu-toggle[aria-expanded="true"] .bars span:nth-child(3) { top: 7px; transform: rotate(-45deg); }
+
+    /* Barra de pesquisa */
+    .search-bar { display: none; border-top: 1px solid var(--line); background: var(--surface); }
+    .search-bar.open { display: block; }
+    .search-bar .container { padding-block: 0.9rem; display: flex; gap: .75rem; }
+    .search-bar input {
+      flex: 1; min-width: 0; padding: 0.8rem 1.1rem;
+      background: var(--bg); color: var(--white);
+      border: 1px solid var(--line); border-radius: 999px;
+      font: inherit;
+    }
+    .search-bar input:focus { outline: none; border-color: var(--blue); box-shadow: var(--glow); }
+
+    /* =========================================================
+       3.1 MENU LATERAL (desliza a partir da direita)
+       ========================================================= */
+    .overlay {
+      position: fixed; inset: 0; z-index: 60; background: rgba(0, 0, 0, .65);
+      opacity: 0; visibility: hidden;
+      transition: opacity .3s ease, visibility 0s linear .3s;
+    }
+    .overlay.show { opacity: 1; visibility: visible; transition: opacity .3s ease, visibility 0s; }
+
+    .side-menu {
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 70;
+      width: min(86vw, 360px);
+      padding: 8rem 1.75rem 2rem;
+      display: flex; flex-direction: column;
+      background: linear-gradient(180deg, #121821, #0B0F14);
+      border-left: 1px solid rgba(0, 168, 255, .4);
+      box-shadow: -24px 0 60px rgba(0, 0, 0, .6);
+      transform: translateX(100%); visibility: hidden;
+      transition: transform .35s ease, visibility 0s linear .35s;
+      overflow-y: auto;
+    }
+    .side-menu.open { transform: none; visibility: visible; transition: transform .35s ease, visibility 0s; }
+    .side-menu::before { /* detalhe azul no topo do painel */
+      content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--blue));
+    }
+    .menu-close { position: absolute; top: 1rem; left: 1.25rem; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: none; font-size: 1.1rem; }
+    .menu-close:hover { color: var(--blue); border-color: var(--blue); }
+    .filter-note { margin: -1rem 0 1.5rem; color: var(--muted); font-size: .9rem; }
+    .link-btn { background: none; border: 0; padding: .5rem; color: var(--blue); font-weight: 700; text-decoration: underline; }
+    .faq details { border-bottom: 1px solid var(--line); padding: 1rem 0; }
+    .faq summary { cursor: pointer; font-weight: 700; }
+    .faq p { color: var(--muted); margin-top: .6rem; max-width: 70ch; }
+    .side-nav li { border-bottom: 1px solid var(--line); }
+    .side-nav a {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.05rem 0.25rem;
+      font-weight: 700; font-size: 1.1rem;
+      transition: color .2s ease, padding-left .2s ease;
+    }
+    .side-nav a span { color: var(--blue); opacity: 0; transform: translateX(-6px); transition: opacity .2s ease, transform .2s ease; }
+    .side-nav a:hover, .side-nav a:focus-visible { color: var(--blue); padding-left: 0.75rem; }
+    .side-nav a:hover span, .side-nav a:focus-visible span { opacity: 1; transform: none; }
+    .side-note { margin-top: auto; padding-top: 2rem; color: var(--muted); font-size: 0.8rem; }
+    .side-menu.open .side-nav li { animation: slideIn .45s cubic-bezier(.2, .7, .2, 1) both; }
+    .side-menu.open .side-nav li:nth-child(2) { animation-delay: .05s; }
+    .side-menu.open .side-nav li:nth-child(3) { animation-delay: .10s; }
+    .side-menu.open .side-nav li:nth-child(4) { animation-delay: .15s; }
+    .side-menu.open .side-nav li:nth-child(5) { animation-delay: .20s; }
+    .side-menu.open .side-nav li:nth-child(6) { animation-delay: .25s; }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+
+    /* =========================================================
+       4. BANNER PRINCIPAL
+       ========================================================= */
+    .hero {
+      position: relative; overflow: hidden;
+      min-height: calc(100vh - var(--header-h) - 36px);
+      min-height: calc(100svh - var(--header-h) - 36px);
+      display: flex; align-items: center;
+      background:
+        radial-gradient(ellipse at 85% 30%, rgba(0, 168, 255, .32), transparent 55%),
+        linear-gradient(180deg, #0B0F14, #080B0F);
+    }
+    .hero::after { /* grelha subtil */
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 70%);
+      opacity: .35; pointer-events: none;
+    }
+    .hero-mark { /* monograma DA em contorno */
+      position: absolute; right: -2vw; top: 50%; transform: translateY(-50%);
+      font-weight: 900; font-size: clamp(10rem, 34vw, 30rem); line-height: 1;
+      color: transparent; -webkit-text-stroke: 2px rgba(0, 168, 255, .45);
+      text-shadow: 0 0 60px rgba(0, 168, 255, .25);
+      user-select: none; pointer-events: none; z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 680px; padding-block: 4rem; }
+    .hero-tag {
+      display: inline-block; margin-bottom: 1.25rem;
+      padding: 0.35rem 0.9rem;
+      border: 1px solid var(--blue); border-radius: 999px;
+      color: var(--blue); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.12em;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 6.5vw, 4.4rem);
+      font-weight: 900; line-height: 1.05; letter-spacing: -0.01em;
+    }
+    .hero p { margin-top: 1.25rem; font-size: clamp(1rem, 2vw, 1.25rem); color: var(--muted); max-width: 46ch; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.25rem; }
+
+    /* Entrada do hero (único momento animado ao carregar) */
+    .hero-content > * { animation: rise .8s cubic-bezier(.2, .7, .2, 1) both; }
+    .hero-content > *:nth-child(2) { animation-delay: .1s; }
+    .hero-content > *:nth-child(3) { animation-delay: .2s; }
+    .hero-content > *:nth-child(4) { animation-delay: .3s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+
+    /* =========================================================
+       5. BENEFÍCIOS
+       ========================================================= */
+    .benefits { border-block: 1px solid var(--line); background: var(--surface); }
+    .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; padding-block: 2rem; }
+    .benefit { display: flex; align-items: center; gap: 0.9rem; padding: 0.5rem; }
+    .benefit-icon {
+      flex: none; width: 52px; height: 52px; display: grid; place-items: center;
+      border-radius: 14px;
+      background: rgba(0, 168, 255, .12); border: 1px solid rgba(0, 168, 255, .35);
+    }
+    .benefit-icon svg { width: 26px; height: 26px; stroke: var(--blue); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .benefit strong { font-weight: 700; font-size: 0.98rem; }
+
+    /* =========================================================
+       6. CATEGORIAS
+       ========================================================= */
+    .cat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+    .cat-card {
+      position: relative; overflow: hidden;
+      aspect-ratio: 3 / 4; border-radius: var(--radius);
+      border: 1px solid var(--line);
+      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+    .cat-card .ph { position: absolute; inset: 0; overflow: hidden; transition: transform .5s ease; }
+    /* A imagem preenche todo o cartão sem deformar (object-fit: cover) */
+    .cat-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .cat-img.is-broken, .product-img.is-broken { visibility: hidden; }
+    .cat-card:hover { transform: translateY(-6px); border-color: var(--blue); box-shadow: var(--glow); }
+    .cat-card:hover .ph { transform: scale(1.08); }
+    .cat-label {
+      position: absolute; inset: auto 0 0 0; padding: 1.5rem 1rem 1rem;
+      background: linear-gradient(transparent, rgba(0, 0, 0, .85));
+      font-weight: 700; text-align: center;
+    }
+
+    /* =========================================================
+       7. PRODUTOS EM DESTAQUE
+       ========================================================= */
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+    .product {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+    .product:hover { transform: translateY(-6px); border-color: var(--blue); box-shadow: var(--glow); }
+    .product .ph { aspect-ratio: 1 / 1; }
+    .product-img { position:absolute; inset: 0; width:  100%; height: 100; object-fit: cover; object-position: center; }
+    .product-cat { color: var(--muted); font-size: 0.8rem; font-weight: 600; }
+    .product-info { padding: 1.1rem 1.25rem 1.4rem; display: grid; gap: 0.35rem; }
+    .product-info h3 { font-size: 1.05rem; font-weight: 700; }
+    .price { color: var(--blue); font-weight: 800; font-size: 1.1rem; }
+    .product .btn { margin-top: 0.75rem; padding: 0.7rem 1rem; font-size: 0.88rem; width: 100%; background: transparent; border-color: var(--blue); color: var(--blue); }
+    .product .btn:hover { background: var(--blue); color: var(--bg); box-shadow: var(--glow); }
+    .product .btn.btn-buy { background: var(--blue); color: var(--bg); }
+    .info-link { margin-top: 0.6rem; font-size: 0.82rem; font-weight: 600; color: var(--muted); text-align: center; text-decoration: underline; text-underline-offset: 3px; }
+    .info-link:hover { color: var(--blue); }
+    .no-results { display: none; color: var(--muted); padding: 1rem 0; }
+
+    /* =========================================================
+       8. BANNERS INFERIORES
+       ========================================================= */
+    .dual-banners { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .promo {
+      position: relative; overflow: hidden;
+      min-height: 340px; padding: clamp(1.75rem, 4vw, 3rem);
+      border-radius: var(--radius); border: 1px solid var(--line);
+      display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; gap: 1.5rem;
+    }
+    .promo-a { background: radial-gradient(circle at 80% 15%, rgba(0, 168, 255, .45), transparent 60%), var(--surface); }
+    .promo-b { background: linear-gradient(135deg, var(--blue), #0073b3); color: var(--bg); border-color: transparent; }
+    .promo h2 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); font-weight: 900; line-height: 1.1; max-width: 14ch; }
+    .promo-b .btn { background: var(--bg); color: var(--white); }
+    .promo-b .btn:hover { box-shadow: 0 0 22px rgba(0, 0, 0, .6); }
+
+    /* =========================================================
+       9. SOBRE MIM / EMPRESA E LOJA
+       ========================================================= */
+    .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: start; }
+    .about-text p { color: var(--muted); font-size: 1.02rem; }
+    .about-text p + p { margin-top: 1rem; }
+    .brand-cards { display: grid; gap: 1rem; }
+    .brand-card { padding: 1.5rem; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); }
+    .brand-card h3 { color: var(--blue); font-weight: 800; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+    .brand-card p { color: var(--muted); font-size: 0.95rem; }
+    .brand-card p + p { margin-top: 0.6rem; }
+
+    /* =========================================================
+       10. CONTACTOS
+       ========================================================= */
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+    .contact-card { padding: 1.5rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); display: grid; gap: 0.35rem; align-content: start; }
+    .contact-card h3 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; color: var(--blue); }
+    .contact-card a.contact-link { font-size: 1.1rem; font-weight: 700; overflow-wrap: anywhere; }
+    .contact-card a.contact-link:hover { color: var(--blue); }
+    .contact-card p { color: var(--muted); font-size: 0.9rem; }
+    .contact-card .btn { margin-top: 0.75rem; justify-self: start; }
+
+    /* =========================================================
+       11. NEWSLETTER
+       ========================================================= */
+    .newsletter { text-align: center; }
+    .newsletter p { color: var(--muted); margin-bottom: 1.75rem; }
+    .news-form { display: flex; gap: .75rem; max-width: 520px; margin-inline: auto; }
+    .news-form input {
+      flex: 1; min-width: 0; padding: 0.9rem 1.3rem;
+      background: var(--bg); color: var(--white);
+      border: 1px solid var(--line); border-radius: 999px; font: inherit;
+    }
+    .news-form input:focus { outline: none; border-color: var(--blue); box-shadow: var(--glow); }
+    .news-note { margin-top: 0.9rem; margin-bottom: 0 !important; font-size: 0.8rem; }
+    .form-msg { margin-top: 1rem; min-height: 1.5rem; font-weight: 600; font-size: 0.92rem; }
+    .form-msg.ok { color: var(--blue); }
+    .form-msg.err { color: #ff8a8a; }
+
+    /* =========================================================
+       12. RODAPÉ
+       ========================================================= */
+    .site-footer { padding-top: 4rem; border-top: 1px solid var(--line); }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1.2fr 1fr; gap: 2.5rem; padding-bottom: 3rem; }
+    .footer-brand p { color: var(--muted); margin-top: 1rem; max-width: 34ch; font-size: 0.92rem; }
+    .footer-col h4 { font-size: 0.95rem; font-weight: 800; margin-bottom: 1rem; }
+    .footer-col li + li { margin-top: 0.55rem; }
+    .footer-col a { color: var(--muted); font-size: 0.92rem; transition: color .2s ease; overflow-wrap: anywhere; }
+    .footer-col a:hover { color: var(--blue); }
+    .socials-wrap { padding-bottom: 2.5rem; }
+    .socials-wrap h4 { font-size: 0.95rem; font-weight: 800; margin-bottom: 0.9rem; }
+    .socials { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .socials a {
+      padding: 0.55rem 1.1rem; border: 1px solid var(--line); border-radius: 999px;
+      font-size: 0.88rem; font-weight: 600;
+      transition: border-color .2s ease, color .2s ease, box-shadow .2s ease;
+    }
+    .socials a[href]:hover { border-color: var(--blue); color: var(--blue); box-shadow: var(--glow); }
+    .socials a:not([href]) { color: var(--muted); border-style: dashed; cursor: default; }
+    .socials a small { margin-left: .35rem; font-size: .72rem; opacity: .8; }
+    .copyright { border-top: 1px solid var(--line); padding-block: 1.5rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
+
+    /* Botão flutuante de WhatsApp */
+    .wa-float {
+      position: fixed; right: 1rem; bottom: 1rem; z-index: 90;
+      width: 54px; height: 54px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: #25D366; color: #fff;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .5);
+      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+    }
+    .wa-float svg { width: 28px; height: 28px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .wa-float:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(37, 211, 102, .45); }
+    .wa-float:focus-visible { outline-color: #fff; }
+    body.menu-open .wa-float { opacity: 0; pointer-events: none; }
+
+    /* Aviso (toast) */
+    .toast {
+      position: fixed; left: 50%; bottom: 1.5rem; z-index: 100;
+      width: max-content; max-width: calc(100vw - 2rem);
+      transform: translate(-50%, 160%);
+      background: var(--blue); color: var(--bg);
+      padding: 0.8rem 1.4rem; border-radius: 18px; text-align: center;
+      font-weight: 700; font-size: 0.9rem; box-shadow: var(--glow);
+      transition: transform .35s ease;
+    }
+    .toast.show { transform: translate(-50%, 0); }
+
+    /* Scroll reveal */
+    .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .js .reveal.in { opacity: 1; transform: none; }
+
+    /* =========================================================
+       13. RESPONSIVO
+       ========================================================= */
+    @media (max-width: 1000px) {
+      .cat-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 860px) {
+      .topbar ul { justify-content: flex-start; gap: 1.5rem; }
+      .dual-banners { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 560px) {
+      .header-inner { gap: 0.5rem; }
+      .logo { font-size: 1.4rem; }
+      .icon-btn { width: 40px; height: 40px; }
+      .header-icons { gap: 0.1rem; }
+      .menu-toggle { margin-left: 0.25rem; }
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; }
+      .news-form { flex-direction: column; }
+      .hero-actions .btn { flex: 1 1 100%; }
+      .hero-mark { opacity: .6; }
+      .copyright { padding-bottom: 5rem; }
+    }
+
+    @media (max-width: 380px) {
+      .logo { font-size: 1.2rem; }
+      .icon-btn { width: 36px; height: 36px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .js .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
+
+  <!-- ========== BARRA SUPERIOR ========== -->
+  <div class="topbar">
+    <ul>
+      <li><a href="#contactos">Suporte aos clientes</a></li>
+      <li><a href="#loja">Ferramentas para produtividade e crescimento</a></li>
+      <li><a href="#novidades">Recursos digitais de alta qualidade</a></li>
+    </ul>
+  </div>
+
+  <!-- ========== CABEÇALHO ========== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#inicio" class="logo" aria-label="D.A SHOP - Início">D.A <span>SHOP</span></a>
+
+      <div class="header-icons">
+        <button class="icon-btn" id="searchToggle" type="button" aria-label="Pesquisar produtos" aria-expanded="false" aria-controls="searchBar">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
+
+        <button class="icon-btn menu-toggle" id="menuToggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="sideMenu">
+          <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="search-bar" id="searchBar">
+      <div class="container">
+        <label for="searchInput" class="sr-only">Pesquisar produtos</label>
+        <input type="search" id="searchInput" placeholder="Pesquisar produtos..." autocomplete="off">
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== MENU LATERAL ========== -->
+  <div class="overlay" id="overlay"></div>
+  <nav class="side-menu" id="sideMenu" aria-label="Menu principal">
+    <button class="menu-close" id="menuClose" type="button" aria-label="Fechar menu">✕</button>
+    <ul class="side-nav">
+      <li><a href="#inicio">Início <span aria-hidden="true">→</span></a></li>
+      <li><a href="#loja">Loja <span aria-hidden="true">→</span></a></li>
+      <li><a href="#novidades">Produtos <span aria-hidden="true">→</span></a></li>
+      <li><a href="#promocoes">Promoções <span aria-hidden="true">→</span></a></li>
+      <li><a href="#sobre">Sobre mim <span aria-hidden="true">→</span></a></li>
+      <li><a href="#contactos">Contactos <span aria-hidden="true">→</span></a></li>
+    </ul>
+    <p class="side-note">D.A SHOP · uma loja da D.AUGUSTO</p>
+  </nav>
+
+  <main id="conteudo">
+
+    <!-- ========== BANNER PRINCIPAL ========== -->
+    <section class="hero" id="inicio">
+      <div class="hero-mark" aria-hidden="true">DA</div>
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-tag">E-BOOKS, PRODUTIVIDADE E TECNOLOGIA</span>
+          <h1>TRANSFORME CONHECIMENTO EM RESULTADOS.</h1>
+          <p>Produtos e recursos para desenvolver disciplina, organizar o seu tempo e acelerar a sua evolução pessoal e profissional.</p>
+          <div class="hero-actions">
+            <a href="#novidades" class="btn btn-primary">Ver Produtos</a>
+            <a href="#loja" class="btn btn-outline">Explorar Categorias</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== BENEFÍCIOS ========== -->
+    <section class="benefits" aria-label="Benefícios">
+      <div class="container benefits-grid">
+        <div class="benefit reveal"><span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/><path d="M8 7h6"/></svg></span><strong>CONTEÚDO DE QUALIDADE</strong></div>
+        <div class="benefit reveal"><span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><strong>PRODUTOS DIGITAIS E FÍSICOS</strong></div>
+        <div class="benefit reveal"><span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/></svg></span><strong>APRENDIZAGEM PRÁTICA</strong></div>
+        <div class="benefit reveal"><span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span><strong>SUPORTE AO CLIENTE</strong></div>
+      </div>
+    </section>
+
+    <!-- ========== CATEGORIAS ==========
+         As imagens (imgebooks.png, produtividade.png, tecnologia.png, ferramentas.png, recursos.png)
+         têm de estar na MESMA pasta do index.html. -->
+    <section class="section" id="loja">
+      <div class="container">
+        <h2 class="section-title reveal">COMPRAR POR CATEGORIA</h2>
+        <div class="cat-grid">
+          <a href="#novidades" class="cat-card reveal" data-cat="E-books">
+            <div class="ph"><img src="imgebooks.png" alt="" class="cat-img" loading="lazy"></div>
+            <span class="cat-label">E-books</span>
+          </a>
+          <a href="#novidades" class="cat-card reveal" data-cat="Produtividade">
+            <div class="ph"><img src="produtividade.jpg.jpg" class="cat-img" loading="lazy"></div>
+            <span class="cat-label">Produtividade</span>
+          </a>
+          <a href="#novidades" class="cat-card reveal" data-cat="Tecnologia">
+            <div class="ph"><img src="tecnologia.jpg.jpg" alt="" class="cat-img" loading="lazy"></div>
+            <span class="cat-label">Tecnologia</span>
+          </a>
+          <a href="#novidades" class="cat-card reveal" data-cat="Ferramentas">
+            <div class="ph"><img src="ferramentas.jpg.jpg" alt="" class="cat-img" loading="lazy"></div>
+            <span class="cat-label">Ferramentas</span>
+          </a>
+          <a href="#novidades" class="cat-card reveal" data-cat="Recursos digitais">
+            <div class="ph"><img src="recursos.jpg.jpg" alt="" class="cat-img" loading="lazy"></div>
+            <span class="cat-label">Recursos digitais</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PRODUTOS EM DESTAQUE ==========
+         COMO INSERIR O LINK DE COMPRA DE CADA PRODUTO:
+         preencha o atributo data-buy-url do cartão com o link completo (https://...).
+         Enquanto estiver vazio, o cartão mostra apenas "Pedir informações no WhatsApp".
+         Cada produto pode ter um link diferente (plataformas diferentes).
+         PREÇOS: ainda não confirmados. Escreva o preço real (e a moeda) em cada <span class="price">. -->
+    <section class="section" id="novidades" style="padding-top:0">
+      <div class="container">
+        <h2 class="section-title reveal">PRODUTOS EM DESTAQUE</h2>
+        <p class="filter-note" id="filterNote" hidden><span id="filterLabel"></span> <button type="button" class="link-btn" id="filterClear">Ver todos</button></p>
+        <div class="product-grid" id="productGrid">
+
+          <article class="product reveal" data-name="30 Dias para Criar Hábitos Melhores" data-buy-url="">
+            <div class="ph" role="img" aria-label="30 Dias para Criar Hábitos Melhores">
+              <img src="carvalho2.png" alt="" class="product-img" loading="lazy">
+            </div>
+            <div class="product-info">
+              <span class="product-cat">E-book</span>
+              <h3>30 Dias para Criar Hábitos Melhores</h3>
+              <span class="price">6,99$</span>
+              <a class="btn" href="https://wa.me/244925102402?text=Ol%C3%A1%21%20Gostaria%20de%20obter%20informa%C3%A7%C3%B5es%20sobre%20o%20produto%20%2230%20Dias%20para%20Criar%20H%C3%A1bitos%20Melhores%22%20da%20D.A%20SHOP." target="_blank" rel="noopener noreferrer">Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="product reveal" data-name="SEM PRODUTOS disponível" data-buy-url="">
+            <div class="ph" role="img" aria-label="SEM PRODUTOS disponível">
+              <img src="carvalho.png" alt="" class="product-img" loading="lazy">
+            </div>
+            <div class="product-info">
+              <span class="product-cat">E-book</span>
+              <h3>SEM PRODUTOS disponível</h3>
+              <span class="price">Preço não disponível</span>
+              <a class="btn" href="https://wa.me/244925102402?text=Ol%C3%A1%21%20Gostaria%20de%20obter%20informa%C3%A7%C3%B5es%20sobre%20o%20produto%20%22Automatize%20e%20Lucre%20-%20Volume%201%22%20da%20D.A%20SHOP." target="_blank" rel="noopener noreferrer">Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="product reveal" data-name="SEM PRODUTOS disponível" data-buy-url="">
+            <div class="ph" role="img" aria-label="SEM PRODUTOS disponível">
+              <img src="carvalho.png" alt="" class="product-img" loading="lazy">
+            </div>
+            <div class="product-info">
+              <span class="product-cat">E-book</span>
+              <h3>SEM PRODUTOS disponível</h3>
+              <span class="price">Preço não disponível</span>
+              <a class="btn" href="https://wa.me/244925102402?text=Ol%C3%A1%21%20Gostaria%20de%20obter%20informa%C3%A7%C3%B5es%20sobre%20o%20produto%20%22Como%20Ganhar%20Dinheiro%20com%20a%20Internet%22%20da%20D.A%20SHOP." target="_blank" rel="noopener noreferrer">Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="product reveal" data-name="SEM PRODUTOS disponível" data-buy-url="">
+            <div class="ph" role="img" aria-label="SEM PRODUTOS disponível">
+              <img src="carvalho.png" alt="" class="product-img" loading="lazy">
+            </div>
+            <div class="product-info">
+              <span class="product-cat">Produtividade</span>
+              <h3>SEM PRODUTOS disponível</h3>
+              <span class="price">Preço não disponível</span>
+              <a class="btn" href="https://wa.me/244925102402?text=Ol%C3%A1%21%20Gostaria%20de%20obter%20informa%C3%A7%C3%B5es%20sobre%20o%20produto%20%22Guia%20de%20Produtividade%20Di%C3%A1ria%22%20da%20D.A%20SHOP." target="_blank" rel="noopener noreferrer">Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="product reveal" data-name="SEM PRODUTOS disponível" data-buy-url="">
+            <div class="ph" role="img" aria-label="SEM PRODUTOS disponível">
+              <img src="carvalho.png" alt="" class="product-img" loading="lazy">
+            </div>
+            <div class="product-info">
+              <span class="product-cat">Ferramentas</span>
+              <h3>SEM PRODUTOS disponível</h3>
+              <span class="price">Preço não disponível</span>
+              <a class="btn" href="https://wa.me/244925102402?text=Ol%C3%A1%21%20Gostaria%20de%20obter%20informa%C3%A7%C3%B5es%20sobre%20o%20produto%20%22Kit%20de%20Ferramentas%20para%20Estudantes%22%20da%20D.A%20SHOP." target="_blank" rel="noopener noreferrer">Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="product reveal" data-name="SEM PRODUTOS disponível" data-buy-url="">
+            <div class="ph" role="img" aria-label="SEM PRODUTOS disponível">
+              <img src="carvalho.png" alt="" class="product-img" loading="lazy">
+            </div>
+            <div class="product-info">
+              <span class="product-cat">Recursos digitais</span>
+              <h3>SEM PRODUTOS disponível</h3>
+              <span class="price">Preço não disponível</span>
+              <a class="btn" href="https://wa.me/244925102402?text=Ol%C3%A1%21%20Gostaria%20de%20obter%20informa%C3%A7%C3%B5es%20sobre%20o%20produto%20%22Recursos%20para%20Empreendedores%22%20da%20D.A%20SHOP." target="_blank" rel="noopener noreferrer">Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+        </div>
+        <p class="no-results" id="noResults">Nenhum produto encontrado. Experimente outra pesquisa.</p>
+      </div>
+    </section>
+
+    <!-- ========== BANNERS INFERIORES / PROMOÇÕES ==========
+         Ainda não há promoções definidas: estes banners não indicam descontos. -->
+    <section class="section" id="promocoes" style="padding-top:0">
+      <div class="container dual-banners">
+        <article class="promo promo-a reveal">
+          <h2>COMECE HOJE A SUA EVOLUÇÃO.</h2>
+          <a href="#novidades" class="btn btn-primary">Ver Produtos</a>
+        </article>
+        <article class="promo promo-b reveal">
+          <h2>CONHECIMENTO E RECURSOS PARA EVOLUIR.</h2>
+          <a href="#loja" class="btn btn-primary">Explorar Categorias</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========== SOBRE MIM ========== -->
+    <section class="section section-alt" id="sobre">
+      <div class="container about-grid">
+        <div class="about-text reveal">
+          <h2 class="section-title">SOBRE MIM</h2>
+          <p>Sou um jovem sonhador, estudante e criador da D.AUGUSTO, uma empresa online que nasceu da vontade de construir algo com propósito.</p>
+          <p>Acredito que o desenvolvimento pessoal, a disciplina, a criatividade e a aprendizagem podem ajudar as pessoas a melhorar os seus hábitos, a desenvolver novas capacidades e a adaptar-se melhor à sociedade em que vivemos.</p>
+          <p>A D.A SHOP surgiu como parte dessa visão: disponibilizar produtos e recursos úteis para quem procura aprender, evoluir e encontrar novas oportunidades.</p>
+          <p>Este é um projeto em crescimento, construído com ambição, dedicação e vontade de fazer a diferença.</p>
+        </div>
+
+        <div class="brand-cards reveal">
+          <div class="brand-card">
+            <h3>D.AUGUSTO</h3>
+            <p>É a empresa online criada por mim.</p>
+          </div>
+          <div class="brand-card">
+            <h3>D.A SHOP</h3>
+            <p>É a loja online que surgiu a partir da D.AUGUSTO.</p>
+            <p>Pretende disponibilizar produtos físicos e digitais, consoante as categorias e os produtos selecionados. O catálogo pode incluir e-books, recursos de produtividade, tecnologia, ferramentas e outros produtos relacionados com os objetivos da loja.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PERGUNTAS FREQUENTES ==========
+         Respostas só com o que está confirmado. Complete-as quando definir entrega, pagamento e reembolsos. -->
+    <section class="section section-alt faq" id="faq">
+      <div class="container">
+        <h2 class="section-title">PERGUNTAS FREQUENTES</h2>
+        <details><summary>O que é a D.A SHOP?</summary><p>É a loja online da D.AUGUSTO, com produtos e recursos para quem procura aprender, evoluir e encontrar novas oportunidades.</p></details>
+        <details><summary>Como posso comprar um produto?</summary><p>Use o botão de cada produto para falar connosco no WhatsApp. Quando um produto tiver link de compra, aparece o botão «Comprar agora».</p></details>
+        <details><summary>Como recebo um produto digital ou físico?</summary><p>A forma de entrega ainda está a ser definida. Pergunte-nos no WhatsApp antes de comprar.</p></details>
+        <details><summary>Posso comprar a partir de outro país?</summary><p>Depende do produto e da plataforma de venda. Confirme connosco no WhatsApp ou por email.</p></details>
+        <details><summary>Quais são as condições de reembolso?</summary><p>Ainda não estão publicadas. Contacte-nos antes de comprar para as confirmar.</p></details>
+      </div>
+    </section>
+
+    <!-- ========== CONTACTOS ========== -->
+    <section class="section" id="contactos">
+      <div class="container">
+        <h2 class="section-title reveal">CONTACTOS</h2>
+        <div class="contact-grid">
+          <div class="contact-card reveal">
+            <h3>TELEFONE</h3>
+            <a class="contact-link" href="tel:+244925102402">+244 925102402</a>
+            <p>Ligue-nos para pedir informações.</p>
+          </div>
+          <div class="contact-card reveal">
+            <h3>EMAIL</h3>
+            <a class="contact-link" href="mailto:domingosbaptistaaugusto18@gmail.com">domingosbaptistaaugusto18@gmail.com</a>
+            <p>Envie-nos a sua mensagem por email.</p>
+          </div>
+          <div class="contact-card reveal">
+            <h3>WHATSAPP</h3>
+            <p>Peça informações sobre produtos, compras ou outros assuntos.</p>
+            <a class="btn btn-primary" href="https://wa.me/244925102402?text=Ol%C3%A1%21%20Gostaria%20de%20obter%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20produtos%20da%20D.A%20SHOP." target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== NEWSLETTER ==========
+         NOTA: não existe serviço de email ligado. O formulário valida o email e abre o programa
+         de email do visitante com um pedido de subscrição para o seu endereço.
+         Para subscrições automáticas, ligue um serviço (Mailchimp, Brevo, Formspree, etc.). -->
+    <section class="section section-alt newsletter" id="newsletter">
+      <div class="container reveal">
+        <h2 class="section-title" style="margin-bottom:.75rem">FIQUE POR DENTRO</h2>
+        <p>Peça para receber novidades e lançamentos.</p>
+        <form class="news-form" id="newsForm" novalidate>
+          <label for="newsEmail" class="sr-only">O seu e-mail</label>
+          <input type="email" id="newsEmail" placeholder="Seu e-mail" autocomplete="email" required>
+          <button type="submit" class="btn btn-primary">Subscrever</button>
+        </form>
+        <p class="news-note">Ao subscrever, abre-se o seu programa de email para nos enviar o pedido.</p>
+        <p class="form-msg" id="formMsg" role="status"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== RODAPÉ ========== -->
+  <footer class="site-footer" id="rodape">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#inicio" class="logo" aria-label="D.A SHOP - Início">D.A <span>SHOP</span></a>
+          <p>Loja online da D.AUGUSTO, com produtos e recursos para quem procura aprender, evoluir e encontrar novas oportunidades.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Loja</h4>
+          <ul>
+            <li><a href="#novidades" data-cat="">Todos os Produtos</a></li>
+            <li><a href="#novidades" data-cat="E-books">E-books</a></li>
+            <li><a href="#novidades" data-cat="Produtividade">Produtividade</a></li>
+            <li><a href="#novidades" data-cat="Tecnologia">Tecnologia</a></li>
+            <li><a href="#novidades" data-cat="Ferramentas">Ferramentas</a></li>
+            <li><a href="#novidades" data-cat="Recursos digitais">Recursos digitais</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contactos</h4>
+          <ul>
+            <li><a href="tel:+244925102402">+244 925 102 402</a></li>
+            <li><a href="mailto:domingosbaptistaaugusto18@gmail.com">domingosbaptistaaugusto18@gmail.com</a></li>
+            <li><a href="https://wa.me/244925102402?text=Ol%C3%A1%21%20Gostaria%20de%20obter%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20produtos%20da%20D.A%20SHOP." target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Sobre</h4>
+          <ul>
+            <li><a href="#sobre">Sobre mim</a></li>
+            <li><a href="#faq">Perguntas frequentes</a></li>
+            <li><a href="#contactos">Contactos</a></li>
+            <li><a href="#promocoes">Promoções</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- REDES SOCIAIS: cole o link completo (https://...) em data-social-url para ativar cada rede.
+           Enquanto estiver vazio, aparece "em breve" e não há link. Pode duplicar uma linha para outra rede. -->
+      <div class="socials-wrap">
+        <h4>Redes sociais</h4>
+        <div class="socials" aria-label="Redes sociais">
+          <a data-social-url="https://www.tiktok.com/@daugusto.oficial?_r=1&amp;_t=ZS-9APUjPpRrBI" aria-label="TikTok da D.AUGUSTO">TikTok <small>em breve</small></a>
+          <a data-social-url="https://www.instagram.com/iam.carvalhoficial?srtk=OGV6a2ptbzVvdHRz" aria-label="Instagram da D.AUGUSTO">Instagram <small>em breve</small></a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">© 2026 D.A SHOP · uma loja da D.AUGUSTO. Todos os direitos reservados.</div>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/244925102402?text=Ol%C3%A1%21%20Gostaria%20de%20obter%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20produtos%20da%20D.A%20SHOP." target="_blank" rel="noopener noreferrer" aria-label="Falar connosco no WhatsApp" title="WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>
+  </a>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+    /* =========================================================
+       D.A SHOP - JavaScript
+       ========================================================= */
+    (function () {
+      window.__daReady = true; // indica ao fallback do <head> que o script arrancou
+      const $ = (s, el = document) => el.querySelector(s);
+      const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+      const CONTACT_EMAIL = 'domingosbaptistaaugusto18@gmail.com';
+
+      /* ---------- Aviso (toast) ---------- */
+      const toast = $('#toast');
+      let toastTimer;
+      function showToast(text, ms = 2600) {
+        toast.textContent = text;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), ms);
+      }
+
+      /* ---------- Menu lateral ---------- */
+      const menu = $('#sideMenu');
+      const overlay = $('#overlay');
+      const menuToggle = $('#menuToggle');
+
+      function isMenuOpen() { return menu.classList.contains('open'); }
+      function setMenu(open, returnFocus) {
+        menu.classList.toggle('open', open);
+        overlay.classList.toggle('show', open);
+        document.body.classList.toggle('menu-open', open);
+        menuToggle.setAttribute('aria-expanded', String(open));
+        menuToggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+        if (open) {
+          const first = $('a', menu);
+          if (first) first.focus({ preventScroll: true });
+        } else if (returnFocus) {
+          menuToggle.focus({ preventScroll: true });
+        }
+      }
+      menuToggle.addEventListener('click', () => setMenu(!isMenuOpen(), false));
+      overlay.addEventListener('click', () => setMenu(false, false));
+      $$('a', menu).forEach(a => a.addEventListener('click', () => setMenu(false, false)));
+      $('#menuClose').addEventListener('click', () => setMenu(false, true));
+      // Mantém o foco do teclado dentro do menu enquanto está aberto
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Tab' || !isMenuOpen()) return;
+        const f = $$('a, button', menu), first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
+
+      /* ---------- Pesquisa + filtro por categoria ---------- */
+      const searchBar = $('#searchBar');
+      const searchToggle = $('#searchToggle');
+      const searchInput = $('#searchInput');
+      const products = $$('.product');
+      const noResults = $('#noResults');
+      const filterNote = $('#filterNote');
+      const norm = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+      const catOf = products.map(p => norm($('.product-cat', p).textContent));
+      const searchIndex = products.map((p, i) => norm(p.dataset.name) + ' ' + catOf[i]);
+      let activeCat = '';
+      let scrolledToResults = false;
+
+      function filterProducts() {
+        const q = norm(searchInput.value.trim());
+        let visible = 0;
+        products.forEach((p, i) => {
+          const ok = searchIndex[i].includes(q) && (!activeCat || catOf[i] === norm(activeCat));
+          p.hidden = !ok;
+          if (ok) visible++;
+        });
+        filterNote.hidden = !activeCat;
+        $('#filterLabel').textContent = 'Categoria: ' + activeCat;
+        noResults.textContent = (activeCat && !q)
+          ? 'Ainda não há produtos na categoria «' + activeCat + '».'
+          : 'Nenhum produto encontrado. Experimente outra pesquisa.';
+        noResults.style.display = visible ? 'none' : 'block';
+        if (q && !scrolledToResults) { $('#novidades').scrollIntoView(); scrolledToResults = true; }
+        if (!q) scrolledToResults = false;
+      }
+      function setSearch(open) {
+        searchBar.classList.toggle('open', open);
+        searchToggle.setAttribute('aria-expanded', String(open));
+        if (open) { searchInput.focus(); }
+        else { searchInput.value = ''; filterProducts(); }
+      }
+      searchToggle.addEventListener('click', () => setSearch(!searchBar.classList.contains('open')));
+      searchInput.addEventListener('input', filterProducts);
+      $$('[data-cat]').forEach(a => a.addEventListener('click', () => { activeCat = a.dataset.cat; filterProducts(); }));
+      $('#filterClear').addEventListener('click', () => { activeCat = ''; filterProducts(); });
+
+/* ---------- Tecla Escape ---------- */
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        if (isMenuOpen()) setMenu(false, true);
+        if (searchBar.classList.contains('open')) setSearch(false);
+      });
+
+      /* ---------- Links de compra individuais (data-buy-url) ---------- */
+      products.forEach(p => {
+        const url = (p.dataset.buyUrl || '').trim();
+        if (!/^https:\/\//i.test(url)) return;
+        const a = document.createElement('a');
+        a.className = 'btn btn-buy';
+        a.href = url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.textContent = 'Comprar agora';
+        p.querySelector('.product-info .btn').before(a);
+      });
+
+      /* ---------- Redes sociais (data-social-url) ---------- */
+      $$('[data-social-url]').forEach(a => {
+        const url = (a.dataset.socialUrl || '').trim();
+        if (/^https:\/\//i.test(url)) {
+          a.href = url;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          const s = $('small', a);
+          if (s) s.remove();
+        }
+      });
+
+      /* ---------- Imagens em falta: esconde o ícone de imagem quebrada ---------- */
+      $$('img.cat-img, img.product-img').forEach(img => {
+        const mark = () => img.classList.add('is-broken');
+        img.addEventListener('error', mark);
+        if (img.complete && img.naturalWidth === 0) mark();
+      });
+
+      /* ---------- Newsletter ---------- */
+      const form = $('#newsForm');
+      const email = $('#newsEmail');
+      const msg = $('#formMsg');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const value = email.value.trim();
+        const valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+        if (valid) {
+          const subject = encodeURIComponent('Subscrição - D.A SHOP');
+          const body = encodeURIComponent('Olá! Gostaria de receber novidades da D.A SHOP neste email: ' + value);
+          msg.textContent = 'A abrir o seu programa de email para enviar o pedido...';
+          msg.className = 'form-msg ok';
+          form.reset();
+          window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + subject + '&body=' + body;
+        } else {
+          msg.textContent = 'Introduza um e-mail válido, por exemplo nome@email.com.';
+          msg.className = 'form-msg err';
+          email.focus();
+        }
+      });
+
+      /* ---------- Scroll reveal ---------- */
+      const items = $$('.reveal');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(en => {
+            if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+          });
+        }, { threshold: 0.12 });
+        items.forEach(el => io.observe(el));
+      } else {
+        items.forEach(el => el.classList.add('in'));
+      }
+    })();
+  </script>
+</body>
+</html>
